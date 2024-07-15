@@ -112,3 +112,20 @@ Video.prototype.generateControls = function () {
 
 };
 
+Video.prototype.initListeners = function () {
+    if (!this.video || !this.controls)
+        return;
+
+    this.video.addEventListener("loadeddata", this.calcProgress.bind(this));
+    this.video.addEventListener("play", this.onPlay.bind(this));
+    this.video.addEventListener("pause", this.onPause.bind(this));
+    this.video.addEventListener("timeupdate", this.calcProgress.bind(this));
+
+    this.videoPlayBtn.addEventListener("click", this.togglePlay.bind(this));
+    this.videoStopBtn.addEventListener("click", this.stop.bind(this));
+    this.soundToggleBtn.addEventListener("click", this.soundToggle.bind(this));
+    this.videoFullscreenBtn.addEventListener("click", this.toggleFullscreen.bind(this));
+    this.videoProgress.addEventListener("change", this.setCurrentTime.bind(this));
+    this.soundRange.addEventListener("change", this.updateVolume.bind(this));
+
+};
