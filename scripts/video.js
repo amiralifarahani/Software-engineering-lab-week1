@@ -150,3 +150,13 @@ Video.prototype.togglePlay = function () {
         this.video.pause();
     }
 };
+
+Video.prototype.stop = function () {
+    if (!this.video)
+        return;
+
+    this.video.currentTime = 0;
+    this.video.pause();
+};
+
+
