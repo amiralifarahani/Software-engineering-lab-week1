@@ -1,8 +1,12 @@
+"use strict";
+
 const video = new Video({
-    wrapperID: "video",
-    videoSrc: "stattic/video.mp4",
-    posterSrc: "stattic/poster.jpg",
-    absolute: false,
-    hideControlsOnPlay: false,
-    progressColor: "black"
+    wrapperID: "video-wrapper",
+    videoSrc: "static/video.mp4",
+    posterSrc: "static/poster.jpg",
+    absolute: true,
+    hideControlsOnPlay: true,
+    progressColor: "white"
 });
+
+console.log(video);
