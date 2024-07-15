@@ -134,3 +134,8 @@ Video.prototype.onPlay = function () {
     this.wrapper.classList.add("playing");
     this.videoPlayBtn.innerHTML = this.icons.pause;
 };
+
+Video.prototype.onPause = function () {
+    this.wrapper.classList.remove("playing");
+    this.videoPlayBtn.innerHTML = this.icons.play;
+};
