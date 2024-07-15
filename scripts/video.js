@@ -238,3 +238,12 @@ Video.prototype.toggleFullscreen = function () {
         }
     }
 };
+
+Video.prototype.setCurrentTime = function (e) {
+    if (!this.video || !e)
+        return;
+
+    const rangeValue = e.target.value || 0;
+
+    this.video.currentTime = (rangeValue * this.video.duration) / 100;
+};
