@@ -190,3 +190,18 @@ Video.prototype.soundToggle = function () {
     animateVolumeRange();
 
 };
+
+Video.prototype.updateVolume = function (e) {
+    if (!this.video || !e)
+        return;
+
+    this.video.volume = e.target.value;
+    if (+e.target.value === 0) {
+        this.soundToggleBtn.innerHTML = this.icons.volume_0;
+    } else if (+e.target.value < .5) {
+        this.soundToggleBtn.innerHTML = this.icons.volume_1;
+    } else {
+        this.soundToggleBtn.innerHTML = this.icons.volume_2;
+    }
+};
+
