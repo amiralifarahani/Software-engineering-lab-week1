@@ -64,6 +64,17 @@ Video.prototype.init = function () {
     this.initListeners();
 };
 
+Video.prototype.generateVideoTag = function () {
+    if (this.video)
+        return;
+
+    this.video = document.createElement("video");
+    this.video.src = this.options.videoSrc;
+    this.video.poster = this.options.posterSrc;
+
+    this.wrapper.append(this.video);
+};
+
 Video.prototype.generateControls = function () {
     if (!this.video || this.controls)
         return;
