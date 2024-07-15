@@ -129,3 +129,8 @@ Video.prototype.initListeners = function () {
     this.soundRange.addEventListener("change", this.updateVolume.bind(this));
 
 };
+
+Video.prototype.onPlay = function () {
+    this.wrapper.classList.add("playing");
+    this.videoPlayBtn.innerHTML = this.icons.pause;
+};
