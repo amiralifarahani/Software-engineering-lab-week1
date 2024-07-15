@@ -64,3 +64,51 @@ Video.prototype.init = function () {
     this.initListeners();
 };
 
+Video.prototype.generateControls = function () {
+    if (!this.video || this.controls)
+        return;
+
+    this.controls = document.createElement("div");
+    this.controls.classList.add("v-controls");
+    if (this.options.absolute)
+        this.controls.classList.add("--absolute");
+
+    if (this.options.hideControlsOnPlay)
+        this.controls.classList.add("--auto-hide");
+
+    this.controls.innerHTML = `
+            <div class="v-controls__btns">
+                <div class="v-controls__btns__sound">
+                    <button id="sound-toggle">${this.icons.volume_2}</button>
+                    <input type="range" min="0" max="1" value="1" step="0.1" id="sound-range">
+                </div>
+                <div class="v-controls__btns_play">
+                    <button id="video-play">${this.icons.play}</button>
+                    <button id="video-stop">${this.icons.stop}</button>
+                </div>
+                <div class="v-controls__btns_fs">
+                    <button id="video-fs">${this.icons.fullscreen}</button>
+                </div>
+            </div>
+            <div class="v-controls__timing">
+                <span class="elapsed-time">00:00</span>
+                <input type="range" min="0" max="100" step="0.05" value="0" id="video-progress">
+                <span class="remaining-time">00:00</span>
+            </div>`;
+
+
+    this.elapsedTimeSpan = this.controls.querySelector(".v-controls__timing .elapsed-time");
+    this.remainingTimeSpan = this.controls.querySelector(".v-controls__timing .remaining-time");
+
+    this.wrapper.style.setProperty('--progress-color', this.options.progressColor);
+    this.wrapper.append(this.controls);
+
+    this.videoPlayBtn = this.wrapper.querySelector(".v-controls__btns #video-play");
+    this.videoStopBtn = this.wrapper.querySelector(".v-controls__btns #video-stop");
+    this.soundToggleBtn = this.wrapper.querySelector(".v-controls__btns #sound-toggle");
+    this.videoFullscreenBtn = this.wrapper.querySelector(".v-controls__btns #video-fs");
+    this.videoProgress = this.wrapper.querySelector(".v-controls__timing input[type=range]");
+    this.soundRange = this.wrapper.querySelector(".v-controls__btns__sound input[type=range]");
+
+};
+
