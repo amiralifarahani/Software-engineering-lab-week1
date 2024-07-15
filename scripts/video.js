@@ -247,3 +247,16 @@ Video.prototype.setCurrentTime = function (e) {
 
     this.video.currentTime = (rangeValue * this.video.duration) / 100;
 };
+
+// calculate the real time progress for the video and
+// set the value of times spans
+Video.prototype.calcProgress = function () {
+    if (!this.video)
+        return;
+
+    this.videoProgress.value = (this.video.currentTime / this.video.duration) * 100;
+
+    this.elapsedTimeSpan.innerHTML = secToTimeStr(this.video.currentTime);
+    this.remainingTimeSpan.innerHTML = secToTimeStr(this.video.duration - this.video.currentTime);
+};
+
