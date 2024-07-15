@@ -260,3 +260,30 @@ Video.prototype.calcProgress = function () {
     this.remainingTimeSpan.innerHTML = secToTimeStr(this.video.duration - this.video.currentTime);
 };
 
+/**
+ * Convert numbers in second to time string like 00:00
+ *
+ * @param seconds
+ * @returns {string}
+ */
+function secToTimeStr(seconds) {
+
+    let timeInHour = Math.floor(seconds / 3600);
+    let timeInMin = Math.floor((seconds % 3600) / 60);
+    let timeInSec = Math.floor(seconds % 60);
+
+    if (timeInHour < 10)
+        timeInHour = `0${timeInHour}`;
+
+    if (timeInMin < 10)
+        timeInMin = `0${timeInMin}`;
+
+    if (timeInSec < 10)
+        timeInSec = `0${timeInSec}`;
+
+    let timeStr = `${timeInMin}:${timeInSec}`;
+    if (parseInt(timeInHour))
+        timeStr = `${timeInHour}:${timeStr}`;
+
+    return timeStr;
+}
