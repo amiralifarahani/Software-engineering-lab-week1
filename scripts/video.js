@@ -205,3 +205,36 @@ Video.prototype.updateVolume = function (e) {
     }
 };
 
+Video.prototype.toggleFullscreen = function () {
+    if (!this.video)
+        return;
+
+    if (!this.fullscreen) {
+        this.fullscreen = true;
+        this.videoFullscreenBtn.innerHTML = this.icons.exitFullscreen;
+        this.controls.classList.add("--fs-abs");
+
+        if (this.wrapper.requestFullscreen) {
+            this.wrapper.requestFullscreen();
+        } else if (this.wrapper.mozRequestFullScreen) { /* Firefox */
+            this.wrapper.mozRequestFullScreen();
+        } else if (this.wrapper.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+            this.wrapper.webkitRequestFullscreen();
+        } else if (this.wrapper.msRequestFullscreen) { /* IE/Edge */
+            this.wrapper.msRequestFullscreen();
+        }
+    } else {
+        this.fullscreen = false;
+        this.videoFullscreenBtn.innerHTML = this.icons.fullscreen;
+        this.controls.classList.remove("--fs-abs");
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        }
+    }
+};
