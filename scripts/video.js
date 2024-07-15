@@ -139,3 +139,14 @@ Video.prototype.onPause = function () {
     this.wrapper.classList.remove("playing");
     this.videoPlayBtn.innerHTML = this.icons.play;
 };
+
+Video.prototype.togglePlay = function () {
+    if (!this.video)
+        return;
+
+    if (this.video.paused) {
+        this.video.play();
+    } else {
+        this.video.pause();
+    }
+};
