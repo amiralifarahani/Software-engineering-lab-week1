@@ -159,4 +159,34 @@ Video.prototype.stop = function () {
     this.video.pause();
 };
 
+Video.prototype.soundToggle = function () {
+    if (!this.video)
+        return;
 
+    this.video.muted = !this.video.muted;
+
+    // handle sound range animation when mute clicked
+    const animateVolumeRange = () => {
+        if (this.video.muted) {
+            if (+this.soundRange.value > 0) {
+                this.soundRange.value = +this.soundRange.value - .1;
+                requestAnimationFrame(animateVolumeRange)
+            }
+        } else {
+            if (+this.soundRange.value < this.volumeMemorize) {
+                this.soundRange.value = +this.soundRange.value + .1;
+                requestAnimationFrame(animateVolumeRange)
+            }
+        }
+    };
+
+    if (this.video.muted) {
+        this.soundToggleBtn.innerHTML = this.icons.muted;
+        this.volumeMemorize = this.soundRange.value;
+    } else {
+        this.soundToggleBtn.innerHTML = this.icons.volume_2;
+    }
+
+    animateVolumeRange();
+
+};
